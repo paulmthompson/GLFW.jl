@@ -1,0 +1,25 @@
+language: julia
+
+sudo: required
+dist: trusty
+
+os:
+  - linux
+
+julia:
+  - release
+
+notifications:
+  email: false
+
+before_install:
+   - sudo apt-get update -qq -y
+   - sudo apt-get install -y xvfb, xauth, libgtk-3-0, cmake, libxxf86vm-dev, libx11-dev, xorg-dev, opencl-headers, libglew-dev, libosmesa6-dev, libglu1-mesa-dev, libgl1-mesa-dev, libxcursor-dev, libegl1-mesa, libpulse-dev, libx11-dev, libxext-dev, libxi-dev, libxinerama-dev, libxrandr-dev, libxss-dev, libxt-dev, libxv-dev, libasound2-dev, libudev-dev, libgl1-mesa-dri, libgles2-mesa, xpra, xserver-xorg-video-dummy, mesa-utils
+before_script:
+  - "export DISPLAY=:99"
+  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
+  - sleep 3 
+  - glxinfo | grep -i opengl
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'

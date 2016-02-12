@@ -37,11 +37,14 @@ addons:
         - libxv-dev
         - libasound2-dev
         - libudev-dev
-        - libgl1-mesa-dri
         - libgles2-mesa
         - xpra
         - xserver-xorg-video-dummy
         - mesa-utils
+before_install:
+	sudo add-apt-repository ppa:xorg-edgers/ppa 
+	sudo apt-get update -qq -y
+	sudo apt-get install -y mesa
 before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
