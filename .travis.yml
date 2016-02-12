@@ -12,23 +12,14 @@ addons:
      sources:
         - kubuntu-backports
      packages:
-        - xvfb
-        - xauth
-        - libgtk-3-0
-        - cmake
-        - libxxf86vm-dev
-        - libx11-dev
         - xorg-dev
         - opencl-headers
         - libglew-dev
         - libosmesa6-dev
-        - libglu1-mesa-dev
         - libgl1-mesa-dev
         - libxcursor-dev
         - libegl1-mesa
         - libpulse-dev
-        - libx11-dev
-        - libxext-dev
         - libxi-dev
         - libxinerama-dev
         - libxrandr-dev
@@ -42,7 +33,7 @@ addons:
         - xserver-xorg-video-dummy
         - mesa-utils
 before_install:
-  - sudo add-apt-repository ppa:xorg-edgers/ppa 
+  - sudo add-apt-repository -y ppa:xorg-edgers/ppa 
   - sudo apt-get update -qq -y
   - sudo apt-get install -y mesa
 before_script:
