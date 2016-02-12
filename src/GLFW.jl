@@ -23,7 +23,7 @@ else
 end
 
 function __init__()
-	SetErrorCallback((code, description) -> error(description))
+	#SetErrorCallback((code, description) -> error(description))
 	GLFW.Init()
 	atexit(GLFW.Terminate)
 end
