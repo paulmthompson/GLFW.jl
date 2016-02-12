@@ -40,12 +40,13 @@ end
 #Check OpenGL Versions
 facts() do
 
-	for i in [1,2,3]
+	for i in [1,2]
 		for j in [0,1]
 
 			GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, i)
 			GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, j)
-
+			GLFW.WindowHint(GLFW.OPENGL_FORWARD_COMPAT, convert(Cuint,0))
+			GLFW.WindowHint(GLFW.OPENGL_PROFILE,GLFW.OPENGL_ANY_PROFILE)
 			window = GLFW.CreateWindow(640, 480, "GLFW.jl")
 			@fact typeof(window) --> GLFW.Window
 			GLFW.DestroyWindow(window)
