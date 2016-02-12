@@ -45,5 +45,4 @@ before_script:
   - sleep 3 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - sudo mkdir /dev/input
   - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'

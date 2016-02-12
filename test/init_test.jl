@@ -5,8 +5,57 @@ using GLFW, FactCheck
 facts() do
 
 	@fact GLFW.Init() --> true
+
+end	
+
+
+facts() do
+	
 	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
 	@fact typeof(window) --> GLFW.Window
+	GLFW.DestroyWindow(window)
+
+end
+
+#Initialize debugging window
+facts() do
+
+	GLFW.WindowHint(GLFW.OPENGL_DEBUG_CONTEXT, Cint(true))
+	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
+	@fact typeof(window) --> GLFW.Window
+	GLFW.DestroyWindow(window)
+
+end
+	
+#Initialize with regular hints
+facts() do
+
+	GLFW.DefaultWindowHints()
+	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
+	@fact typeof(window) --> GLFW.Window
+	GLFW.DestroyWindow(window)
+
+end
+
+#Check OpenGL Versions
+facts() do
+
+	for i in [1,2,3]
+		for j in [0,1]
+
+			GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, i)
+			GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, j)
+
+			window = GLFW.CreateWindow(640, 480, "GLFW.jl")
+			@fact typeof(window) --> GLFW.Window
+			GLFW.DestroyWindow(window)
+
+		end
+	end
+
+
 end
 
 end
+
+
