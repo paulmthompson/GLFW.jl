@@ -24,7 +24,7 @@ end
 
 function __init__()
 	#SetErrorCallback((code, description) -> error(description))
-	GLFW.Init()
+	println("GLFW Initialization was ", GLFW.Init())
 	atexit(GLFW.Terminate)
 end
 
