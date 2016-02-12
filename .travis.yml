@@ -1,22 +1,49 @@
 language: julia
 os:
   - linux
-  - osx
-matrix:
-  allow_failures:
-    - os: osx
 julia:
   - release
-  - nightly
 notifications:
   email: false
 addons:
   apt:
-    packages:
-    - cmake
-    - libxxf86vm-dev
-    sources:
-    - kubuntu-backports
+     sources:
+        - kubuntu-backports
+     packages:
+        - xvfb
+        - xauth
+        - libgtk-3-0
+        - cmake
+        - libxxf86vm-dev
+        - libx11-dev
+        - xorg-dev
+        - opencl-headers
+        - libglew-dev
+        - libosmesa6-dev
+        - libglu1-mesa-dev
+        - libgl1-mesa-dev
+        - libxcursor-dev
+        - libegl1-mesa
+        - libpulse-dev
+        - libx11-dev
+        - libxext-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxrandr-dev
+        - libxss-dev
+        - libxt-dev
+        - libxv-dev
+        - libasound2-dev
+        - libudev-dev
+        - libgl1-mesa-dri
+        - libgles2-mesa
+        - xpra
+        - xserver-xorg-video-dummy
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start" # X virtual framebuffer
+  - "export DISPLAY=:99"
+  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
+  - sleep 3 
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - sudo mkdir /dev/input
+  - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'

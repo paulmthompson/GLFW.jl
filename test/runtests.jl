@@ -1,13 +1,7 @@
-travis = get(ENV, "TRAVIS", "") == "true"
+module TestSetup
 
-try
-	# try...catch introduces a new scope, so we need to eval the import
-	# into the Main module scope.
-	eval(Main, :(import GLFW))
-catch e
-	if travis && contains(e.msg, "/dev/input: No such file or directory")
-		warn(e.msg)
-	else
-		rethrow()
-	end
+using GLFW
+
+include("init_test.jl")
+
 end
