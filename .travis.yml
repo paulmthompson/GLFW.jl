@@ -42,6 +42,7 @@ before_script:
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
   - sleep 3 
   - glxinfo | grep -i opengl
+  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo | grep OpenGL
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
