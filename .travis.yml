@@ -35,6 +35,7 @@ addons:
 before_install:
   - sudo add-apt-repository -y ppa:xorg-edgers/ppa 
   - sudo apt-get update -qq -y
+  - export DEBIAN_FRONTEND=noninteractive
   - sudo apt-get upgrade -y libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa
 before_script:
   - "export DISPLAY=:99"
