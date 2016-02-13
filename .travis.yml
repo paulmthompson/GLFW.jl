@@ -36,7 +36,7 @@ before_install:
   - sudo add-apt-repository -y ppa:xorg-edgers/ppa 
   - sudo apt-get update -qq -y
   - export DEBIAN_FRONTEND=noninteractive
-  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa
+  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa libgles2-mesa-dev libegl1-mesa-dev libgbm1 libgl1-mesa-dri libva1
 before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
