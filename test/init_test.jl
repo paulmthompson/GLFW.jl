@@ -57,6 +57,18 @@ facts() do
 
 end
 
+#Check OpenGL Versions
+facts() do
+
+	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, 3)
+	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 3)
+	GLFW.WindowHint(GLFW.OPENGL_FORWARD_COMPAT, convert(Cuint,0))
+	GLFW.WindowHint(GLFW.OPENGL_PROFILE,GLFW.OPENGL_ANY_PROFILE)
+	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
+	@fact typeof(window) --> GLFW.Window
+	GLFW.DestroyWindow(window)
+end
+
 end
 
 
