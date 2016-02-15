@@ -58,7 +58,7 @@ before_install:
   - make
   - sudo make install
   - cd $TOP/mesa
-  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls
+  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls --with-llvm-prefix=/usr/local/bin
   - make
   - sudo make install
   - cd $TOP/xf86-video-vmware
