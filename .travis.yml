@@ -39,13 +39,17 @@ before_install:
   - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa libgles2-mesa-dev libegl1-mesa-dev libgbm1 libgl1-mesa-dri libva1 automake libtool libpthread-stubs0-dev xserver-xorg-dev x11proto-xinerama-dev libx11-xcb-dev libxcb-glx0-dev libxrender-dev xutils-dev
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
   - export TOP=$PWD
-#  - git clone git://anongit.freedesktop.org/git/mesa/mesa
+  - git clone git://anongit.freedesktop.org/git/mesa/mesa
 #  - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
   - git clone git://anongit.freedesktop.org/git/mesa/drm
 #  - git clone git://anongit.freedesktop.org/git/xorg/driver/xf86-video-vmware
   - export LIBDIR=/usr/lib/x86_64-linux-gnu
   - cd $TOP/drm
   - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
+  - make
+  - sudo make install
+  - cd $TOP/mesa
+  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls
   - make
   - sudo make install
 before_script:
