@@ -56,7 +56,6 @@ before_install:
   - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
   - make
   - sudo make install
-  - sudo rm /lib/modules/`uname -r`/kernel/drivers/gpu/drm/vmwgfx.ko*
   - cd $TOP/vmwgfx
   - make
   - sudo make install
