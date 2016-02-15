@@ -41,42 +41,42 @@ before_install:
   - sudo apt-get -y install linux-headers-$(uname -r) xutils-dev
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
   - pip install --user mako
-  - export TOP=$PWD
+#  - export TOP=$PWD
 #  - git clone git://anongit.freedesktop.org/git/mesa/mesa
-  - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
-  - git clone git://anongit.freedesktop.org/git/mesa/drm
-  - git clone git://anongit.freedesktop.org/git/xorg/driver/xf86-video-vmware
-  - export LIBDIR=/usr/lib/x86_64-linux-gnu
-  - cd $TOP/drm
-  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
-  - make
-  - sudo make install
+#  - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
+#  - git clone git://anongit.freedesktop.org/git/mesa/drm
+#  - git clone git://anongit.freedesktop.org/git/xorg/driver/xf86-video-vmware
+#  - export LIBDIR=/usr/lib/x86_64-linux-gnu
+#  - cd $TOP/drm
+#  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
+#  - make
+#  - sudo make install
 #  - cd $TOP/mesa
 #  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga,swrast --enable-xa --disable-dri --enable-xlib-glx --with-llvm-prefix=/usr/local/bin
 #  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls --with-llvm-prefix=/usr/local/bin
 #  - make
 #  - sudo make install
-  - cd $TOP/xf86-video-vmware
-  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
-  - make
-  - sudo make install
-  - cd $TOP/vmwgfx
-  - make
-  - sudo make install
-  - sudo depmod -a
-  - sudo update-initramfs -u
-  - echo vmwgfx | sudo tee -a /etc/modules
-  - find /lib/modules -name vmwgfx.ko -exec ls -l '{}' \;
-  - sudo modprobe vmwgfx
-  - cd $TOP
+#  - cd $TOP/xf86-video-vmware
+#  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
+#  - make
+#  - sudo make install
+#  - cd $TOP/vmwgfx
+#  - make
+#  - sudo make install
+#  - sudo depmod -a
+#  - sudo update-initramfs -u
+#  - echo vmwgfx | sudo tee -a /etc/modules
+#  - find /lib/modules -name vmwgfx.ko -exec ls -l '{}' \;
+#  - sudo modprobe vmwgfx
+#  - cd $TOP
 before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
   - sleep 3 
   - glxinfo
-  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
+  - MESA_GL_VERSION_OVERRIDE=3.3 MESA_GLSL_VERSION_OVERRIDE=330 LIBGL_ALWAYS_SOFTWARE=1 glxinfo
   - cat ${HOME}/.xpra/xorg.log
-  - dmesg | grep vmw
+#  - dmesg | grep vmw
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
