@@ -39,7 +39,8 @@ before_install:
   - sudo add-apt-repository -y ppa:xorg-edgers/ppa 
   - sudo apt-get update -qq -y
   - export DEBIAN_FRONTEND=noninteractive
-#  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa libgles2-mesa-dev libegl1-mesa-dev libgbm1 libgl1-mesa-dri libva1 libxatracker-dev xserver-xorg-video-vmware-lts-quantal
+#  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgles2-mesa libgles2-mesa-dev libegl1-mesa-dev libgbm1 libgl1-mesa-dri libva1 libxatracker-dev
+  - sudo apt-get -yq --force-yes install xserver-xorg-video-vmware-lts-trusty
   - sudo apt-get -yq --force-yes install git-core
   - sudo apt-get -yq --force-yes install automake libtool libpthread-stubs0-dev
   - sudo apt-get -yq --force-yes install xserver-xorg-dev x11proto-xinerama-dev libx11-xcb-dev
@@ -78,8 +79,8 @@ before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
   - sleep 3 
-  - glxinfo | grep -i opengl
-  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo | grep OpenGL
+  - glxinfo
+  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
