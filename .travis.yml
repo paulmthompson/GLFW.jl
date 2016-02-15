@@ -75,6 +75,8 @@ before_script:
   - sleep 3 
   - glxinfo
   - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
+  - cat ${HOME}/.xpra/xorg.log
+  - dmesg | grep vmw
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
