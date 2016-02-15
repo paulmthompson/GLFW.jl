@@ -44,13 +44,13 @@ before_install:
   - export TOP=$PWD
 #  - git clone git://anongit.freedesktop.org/git/mesa/mesa
   - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
-#  - git clone git://anongit.freedesktop.org/git/mesa/drm
+  - git clone git://anongit.freedesktop.org/git/mesa/drm
 #  - git clone git://anongit.freedesktop.org/git/xorg/driver/xf86-video-vmware
-#  - export LIBDIR=/usr/lib/x86_64-linux-gnu
-#  - cd $TOP/drm
-#  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
-#  - make
-#  - sudo make install
+  - export LIBDIR=/usr/lib/x86_64-linux-gnu
+  - cd $TOP/drm
+  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
+  - make
+  - sudo make install
 #  - cd $TOP/mesa
 #  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls
 #  - make
