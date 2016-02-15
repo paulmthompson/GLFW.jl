@@ -32,6 +32,8 @@ addons:
         - xpra
         - xserver-xorg-video-dummy
         - mesa-utils
+        - python-mako
+        - python3-mako
 before_install:
   - sudo add-apt-repository -y ppa:xorg-edgers/ppa 
   - sudo apt-get update -qq -y
@@ -40,7 +42,7 @@ before_install:
   - sudo apt-get -y install linux-headers-$(uname -r)
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
   - export TOP=$PWD
-#  - git clone git://anongit.freedesktop.org/git/mesa/mesa
+  - git clone git://anongit.freedesktop.org/git/mesa/mesa
   - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
   - git clone git://anongit.freedesktop.org/git/mesa/drm
   - git clone git://anongit.freedesktop.org/git/xorg/driver/xf86-video-vmware
@@ -49,10 +51,10 @@ before_install:
   - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
   - make
   - sudo make install
-#  - cd $TOP/mesa
-#  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls
-#  - make
-#  - sudo make install
+  - cd $TOP/mesa
+  - ./autogen.sh --prefix=/usr --libdir=${LIBDIR} --with-gallium-drivers=svga --with-dri-drivers=swrast --enable-xa --disable-dri3 --enable-glx-tls
+  - make
+  - sudo make install
   - cd $TOP/xf86-video-vmware
   - ./autogen.sh --prefix=/usr --libdir=${LIBDIR}
   - make
