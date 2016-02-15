@@ -61,6 +61,11 @@ before_install:
   - make
   - sudo make install
   - sudo depmod -a
+  - sudo update-initramfs -u
+  - echo vmwgfx | sudo tee -a /etc/modules
+  - find /lib/modules -name vmwgfx.ko -exec ls -l '{}' \;
+  - sudo modprobe vmwgfx
+  - glxinfo | grep -i opengl
 before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
