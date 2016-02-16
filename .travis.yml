@@ -15,7 +15,6 @@ addons:
         - xorg-dev
         - opencl-headers
         - libglew-dev
-        - libosmesa6-dev
         - libgl1-mesa-dev
         - libxcursor-dev
         - libpulse-dev
@@ -70,13 +69,11 @@ before_install:
 #  - sudo modprobe vmwgfx
 #  - cd $TOP
 before_script:
-#  - Xorg :99
   - export DISPLAY=:99
-  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
-#  - Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config `pwd`/test/dummy.xorg.conf :99
-  - sleep 3 
   - export LIBGL_ALWAYS_SOFTWARE=1
-  - sudo LIBGL_ALWAYS_SOFTWARE=1 glxinfo
+  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
+  - sleep 3 
+  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
   - glxinfo
 #  - cat ./10.log
 #  - dmesg | grep vmw
