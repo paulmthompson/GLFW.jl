@@ -40,6 +40,7 @@ before_install:
   - sudo apt-get -yq --force-yes install libxcb-glx0-dev libxrender-dev
   - sudo apt-get -y install linux-headers-$(uname -r) xutils-dev
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
+  - sudo apt-get -yq --force-yes remove lxc lxc-templates python3-lxc
   - sudo apt-get -yq --force-yes upgrade
 #  - pip install --user mako
 #  - export TOP=$PWD
