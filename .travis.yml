@@ -40,8 +40,6 @@ before_install:
   - sudo apt-get -yq --force-yes install libxcb-glx0-dev libxrender-dev
   - sudo apt-get -y install linux-headers-$(uname -r) xutils-dev
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
-  - sudo apt-get -yq --force-yes remove lxc lxc-templates python3-lxc postgresql-9.2 postgresql-contrib-9.2 postgresql-9.3 postgresql-contrib-9.3 postgresql-9.4 postgresql-contrib-9.4
-  - sudo apt-get -yq --force-yes upgrade
 #  - pip install --user mako
 #  - export TOP=$PWD
 #  - git clone git://anongit.freedesktop.org/git/mesa/mesa
@@ -77,7 +75,8 @@ before_script:
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
 #  - Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config `pwd`/test/dummy.xorg.conf :99
   - sleep 3 
-  - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
+  - export LIBGL_ALWAYS_SOFTWARE=1
+  - sudo LIBGL_ALWAYS_SOFTWARE=1 glxinfo
   - glxinfo
 #  - cat ./10.log
 #  - dmesg | grep vmw
