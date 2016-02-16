@@ -73,11 +73,11 @@ before_script:
 #  - Xorg :99
   - export DISPLAY=:99
 #  - LIBGL_ALWAYS_SOFTWARE=1 xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
-  - Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ${HOME}/.xpra/xorg.log -config `pwd`/test/dummy.xorg.conf :99
+  - Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config `pwd`/test/dummy.xorg.conf :99
   - sleep 3 
   - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
   - glxinfo
-  - cat ${HOME}/.xpra/xorg.log
+  - cat ./10.log
 #  - dmesg | grep vmw
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
