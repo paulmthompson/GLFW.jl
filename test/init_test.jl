@@ -8,13 +8,11 @@ facts() do
 
 end	
 
-
 facts() do
 	
 	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
 	@fact typeof(window) --> GLFW.Window
 	GLFW.DestroyWindow(window)
-
 end
 
 #Initialize debugging window
@@ -53,8 +51,6 @@ facts() do
 
 		end
 	end
-
-
 end
 
 #Version 3.0
@@ -70,6 +66,7 @@ facts() do
 end
 
 #Version 3.3
+#=
 facts() do
 
 	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, 3)
@@ -80,6 +77,7 @@ facts() do
 	@fact typeof(window) --> GLFW.Window
 	GLFW.DestroyWindow(window)
 end
+=#
 
 #Version 3.3 FC
 facts() do
