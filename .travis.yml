@@ -27,6 +27,7 @@ addons:
         - xpra
         - xserver-xorg-video-dummy
         - mesa-utils
+        - xserver-xorg-core
 before_install:
   - sudo add-apt-repository -y ppa:oibaf/graphics-drivers
   - sudo apt-get update -qq -y
