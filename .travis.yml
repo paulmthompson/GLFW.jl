@@ -22,14 +22,12 @@ addons:
         - libxv-dev
         - libasound2-dev
         - libudev-dev
-        - xpra
         - mesa-utils
-        - xserver-xorg-core
 before_install:
-  - sudo add-apt-repository -y ppa:oibaf/graphics-drivers
-  - sudo apt-get update -qq -y
-  - export DEBIAN_FRONTEND=noninteractive
-  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgbm1 libgl1-mesa-dri libva1 libxatracker-dev
+#  - sudo add-apt-repository -y ppa:oibaf/graphics-drivers
+#  - sudo apt-get update -qq -y
+#  - export DEBIAN_FRONTEND=noninteractive
+#  - sudo apt-get -yq --force-yes install libgl1-mesa-dev libgl1-mesa-glx mesa-common-dev libglapi-mesa libgbm1 libgl1-mesa-dri libva1 libxatracker-dev
 #  - sudo apt-get -yq --force-yes install xserver-xorg-video-vmware-lts-trusty
 #  - sudo apt-get -yq --force-yes install git-core
 #  - sudo apt-get -yq --force-yes install automake libtool libpthread-stubs0-dev
