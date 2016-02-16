@@ -65,14 +65,14 @@ facts() do
 	GLFW.DestroyWindow(window)
 end
 
-#Version 3.3
+#Version 3.1
 #=
 facts() do
 
 	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, 3)
-	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 3)
+	GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 1)
 	GLFW.WindowHint(GLFW.OPENGL_FORWARD_COMPAT, convert(Cuint,0))
-	GLFW.WindowHint(GLFW.OPENGL_PROFILE,GLFW.OPENGL_CORE_PROFILE)
+	GLFW.WindowHint(GLFW.OPENGL_PROFILE,GLFW.OPENGL_ANY_PROFILE)
 	window = GLFW.CreateWindow(640, 480, "GLFW.jl")
 	@fact typeof(window) --> GLFW.Window
 	GLFW.DestroyWindow(window)

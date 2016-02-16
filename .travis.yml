@@ -40,7 +40,7 @@ before_install:
   - sudo apt-get -yq --force-yes install libxcb-glx0-dev libxrender-dev
   - sudo apt-get -y install linux-headers-$(uname -r) xutils-dev
   - sudo apt-get -yq --force-yes build-dep libgl1-mesa-dri libxcb-glx0-dev
-  - pip install --user mako
+#  - pip install --user mako
 #  - export TOP=$PWD
 #  - git clone git://anongit.freedesktop.org/git/mesa/mesa
 #  - git clone git://anongit.freedesktop.org/git/mesa/vmwgfx
@@ -73,10 +73,10 @@ before_script:
   - "export DISPLAY=:99"
   - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
   - sleep 3 
-  - MESA_GL_VERSION_OVERRIDE=3.3FC MESA_GLSL_VERSION_OVERRIDE=330 glxinfo
+  - LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=3.3FC MESA_GLSL_VERSION_OVERRIDE=330 glxinfo
   - glxinfo
   - cat ${HOME}/.xpra/xorg.log
 #  - dmesg | grep vmw
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - MESA_GL_VERSION_OVERRIDE=3.3FC MESA_GLSL_VERSION_OVERRIDE=330 julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
+  - LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=3.3FC MESA_GLSL_VERSION_OVERRIDE=330 julia --check-bounds=yes --depwarn=no -e 'Pkg.clone(pwd()); Pkg.build("GLFW"); Pkg.test("GLFW"; coverage=true)'
