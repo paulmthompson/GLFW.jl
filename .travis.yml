@@ -10,13 +10,16 @@ dist: trusty
 addons:
   apt:
      packages:
+        - libglew-dev
+        - freeglut3-dev
+        - libxi-dev
+        - libxmu-dev
+        - xserver-xorg
         - xorg-dev
         - opencl-headers
-        - libglew-dev
         - libgl1-mesa-dev
         - libxcursor-dev
         - libpulse-dev
-        - libxi-dev
         - libxinerama-dev
         - libxrandr-dev
         - libxv-dev
