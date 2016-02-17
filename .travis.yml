@@ -14,7 +14,8 @@ addons:
         - freeglut3-dev
         - libxi-dev
         - libxmu-dev
-        - xserver-xorg
+        - xserver-xorg-video-dummy
+        - xpra
         - xorg-dev
         - opencl-headers
         - libgl1-mesa-dev
@@ -71,12 +72,12 @@ before_install:
 before_script:
   - export DISPLAY=:99
   - export LIBGL_ALWAYS_SOFTWARE=1
-  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render;
-#  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
+#  - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render;
+  - xpra --xvfb="Xorg +extension GLX +extension RANDR +extension RENDER -config `pwd`/test/dummy.xorg.conf -logfile ${HOME}/.xpra/xorg.log"  start :99
   - sleep 3 
   - LIBGL_ALWAYS_SOFTWARE=1 glxinfo
   - glxinfo
-#  - cat ./10.log
+  - cat ${HOME}/.xpra/xorg.log
 #  - dmesg | grep vmw
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
